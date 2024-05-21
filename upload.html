@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Way to track</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <style>
+        /* Style the form container */
+        nav {
+  background-color: #ffffff;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo {
+  font-size: 24px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-right: 20px;
+}
+
+.nav-links li a {
+  color: #050505;
+  text-decoration: none;
+}
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: #000000;
+  margin: 3px;
+}
+
+/* Added this class for active state of burger menu */
+.burger.active div {
+  background-color: #ffffff;
+}
+
+/* Updated media query */
+@media screen and (max-width: 768px) {
+  .nav-links {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background-color: #ffffff;
+      padding: 10px 0;
+  }
+
+  .nav-links.active {
+      display: flex;
+  }
+
+  .nav-links li {
+      margin: 10px 0;
+  }
+
+  .burger {
+      display: flex;
+  }
+}
+
+#inventoryForm {
+    width: 50%;
+    margin: 0 auto;
+  }
+  
+  /* Style form labels */
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Style form inputs */
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Style submit button */
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  /* Optional: Style the file input */
+  input[type="file"] {
+    margin-bottom: 10px;
+  }
+  
+  /* Optional: Style the description textarea */
+  textarea {
+    height: 100px;
+    resize: vertical;
+  }
+    </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo"><h4 style="color: #000000;">Way to track</h4></div>
+      <ul class="nav-links" style="cursor: pointer;">
+          <li><a href="/index.html">Home</a></li>
+          
+          <li><a href="/viewProducts.html">Edit product</a></li>
+          <!--<li><a href="/viewSpare.html">Edit spare</a></li>-->
+      </ul>
+      <div class="burger" onclick="toggleMenu()">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+  </nav>
+</header>
+<Main>
+    <h1 style="margin-bottom: 2cm;">Product Upload</h1>
+    <form id="inventoryForm" enctype="multipart/form-data">
+        <label for="itemName">Product Name:</label>
+        <input type="text" id="itemName" name="itemName" required><br><br>
+        
+        <label for="itemPrice">Price:</label>
+        <input type="number" id="itemPrice" name="itemPrice" required><br><br>
+        
+        <label for="itemType">Type:</label>
+        <select id="itemType" name="itemType">
+            <option value="product">Product</option>
+            <!--<option value="spare">Spare</option>-->
+            
+        </select><br><br>
+
+        <label for="itemDes">Description:</label>
+        <textarea id="itemDes"></textarea><br><br>
+
+        <label for="itemImage">Image:</label>
+        <input type="file" id="itemImage" name="itemImage" accept="image/*"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <div>
+  </div>
+  </Main>
+    <script src="upload.js"></script>
+    <script> 
+    function toggleMenu() {
+      var navLinks = document.querySelector('.nav-links');
+      var burger = document.querySelector('.burger');
+      navLinks.classList.toggle('active');
+      burger.classList.toggle('active'); 
+    }</script>
+</body>
+</html>

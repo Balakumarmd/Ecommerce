@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Way to track</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  
+  <link href="assets/css/main.css" rel="stylesheet">
+  <style>
+    .product-image {
+    max-width: 100%; 
+    height: auto; 
+}
+  </style>
+
+  
+</head>
+
+<body>
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+       
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>Way to track</h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">Services</a></li>
+          <li><a href="#service">Product</a></li>
+         
+          <li><a href="login.html">Login</a></li>
+          <li><a class="get-a-quote" href="#contact">Contact</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+    <div class="container">
+      <div class="row gy-4 d-flex justify-content-between">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h2 data-aos="fade-up">Navigate with confidence</h2>
+          <p data-aos="fade-up" data-aos-delay="100"> Discover precision GPS solutions for every vehicle at way to track</p>
+
+         
+        </div>
+
+        <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
+          <img src="assets/img/hero-img.svg" class="img-fluid mb-3 mb-lg-0" alt="">
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+
+  <main id="main">
+
+    <!-- ======= Featured Services Section ======= -->
+    <section id="featured-services" class="featured-services">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up">
+            <div class="icon flex-shrink-0"><i class="fa-solid fa-person-biking"></i></div>
+            <div>
+              <h4 class="title">Personal Bike</h4>
+              <p class="description">Experience freedom on two wheels – Safeguard your journeys with our compact GPS device, putting navigation control right in the palm of your hand</p>
+              <!--<a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>-->
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon flex-shrink-0"><i class="fa-solid fa-truck"></i></div>
+            <div>
+              <h4 class="title">Truck/Auto</h4>
+              <p class="description">Empower your fleet with 24/7 efficiency – Keep tabs on your goods carriers with precision GPS tracking from way to track</p>
+              <!--<a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>-->
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon flex-shrink-0"><i class="fa-solid fa-car-side"></i></div>
+            <div>
+              <h4 class="title">Car</h4>
+              <p class="description">Unleash the power of precision – Seamlessly navigate every journey with our advanced GPS device, turning your car into a beacon of efficiency and safety</p>
+              <!--<a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>-->
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+    </section><!-- End Featured Services Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about pt-0">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+          <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
+            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+            
+          </div>
+          <div class="col-lg-6 content order-last  order-lg-first">
+            <h3>About Us</h3>
+            <p>
+              Welcome to way to track, your trusted partner in vehicle GPS solutions. With a passion for navigation and a commitment to excellence, we specialize in providing cutting-edge GPS tracking devices tailored to meet your needs.
+              
+
+              At way to track, we understand the importance of vehicle security and fleet management. Our team comprises dedicated professionals with years of experience in the industry, ensuring that we deliver top-notch products and unparalleled service to our customers.
+              
+
+
+
+Driven by innovation and a desire to enhance safety and efficiency on the road, we continuously strive to stay ahead of the curve. Whether you're a business owner looking to optimize your fleet operations or an individual seeking peace of mind for your personal vehicle, we have the perfect GPS solution for you.
+
+Choose way to track for reliability, precision, and peace of mind on every journey.
+            </p>
+           
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="service" class="services pt-0">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <span>Our Products</span>
+          <h2>Our Products</h2>
+
+        </div>
+
+        <div class="row gy-4">
+
+          <div id="productDetailsContainer" class="row">
+            <!-- Product details will be dynamically inserted here -->
+        </div>
+
+          
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header">
+          <span>Our Services</span>
+          <h2>Our Services</h2>
+
+        </div>
+
+        <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+
+          <div class="col-md-5">
+            <img src="assets/img/Kids tracker.jpeg" class="img-fluid" alt="" style="height: 10cm; width: 13cm;">
+          </div>
+          <div class="col-md-7">
+            <h3>Kids tracker</h3>
+            <p class="fst-italic">
+              Ensure your child's safety and peace of mind with our advanced Kids Tracker. With real-time location updates and customizable safety zones, you can stay connected and informed about your child's whereabouts at all times.
+            </p>
+           
+          </div>
+        </div><!-- Features Item -->
+
+        <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+          <div class="col-md-5 order-1 order-md-2">
+            <img src="assets/img/assests tracker.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 order-2 order-md-1">
+            <h3>Assests Tracker</h3>
+            <p class="fst-italic">
+              Protect your valuable assets with our Asset Tracker solution. Whether it's equipment, vehicles, or inventory, our GPS tracking technology allows you to monitor and manage your assets with precision, enhancing security and efficiency in your operations.
+            </p>
+            <p>
+             
+            </p>
+          </div>
+        </div><!-- Features Item -->
+
+        <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+          <div class="col-md-5">
+            <img src="assets/img/fuel monitoring.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7">
+            <h3>Fuel Monitoring</h3>
+            <p>Optimize your fleet's fuel usage and reduce costs with our Fuel Monitoring system. Track fuel consumption in real-time, identify inefficiencies, and implement strategies to improve fuel efficiency, ultimately maximizing your bottom line.</p>
+           
+          </div>
+        </div>
+
+        <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+          <div class="col-md-5 order-1 order-md-2">
+            <img src="assets/img/temperature tracker.jpeg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 order-2 order-md-1">
+            <h3>Temperature Tracker</h3>
+            <p class="fst-italic">
+              Maintain the integrity of your perishable goods during transport with our Temperature Tracker solution. Monitor temperature levels in real-time and receive alerts for any deviations, ensuring that your products reach their destination in optimal condition.
+            </p>
+            <p>
+              
+            </p>
+          </div>
+        </div><!-- Features Item -->
+
+        <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+          <div class="col-md-5">
+            <img src="assets/img/personal tracker.jpeg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7">
+            <h3>Personal Tracker</h3>
+            <p>Stay connected and protected wherever you go with our Personal Tracker. Whether for elderly family members, outdoor enthusiasts, or lone workers, our compact and reliable GPS device provides peace of mind by enabling quick and accurate location tracking and emergency assistance when needed.</p>
+           
+          </div>
+        </div>
+
+        <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+          <div class="col-md-5 order-1 order-md-2">
+            <img src="assets/img/Vehicle-Tracker.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 order-2 order-md-1">
+            <h3>Vehicle Tracker</h3>
+            <p class="fst-italic">
+              Take control of your fleet's operations with our Vehicle Tracker solution. From route optimization to driver behavior monitoring, our GPS tracking technology empowers you to improve productivity, enhance safety, and streamline your vehicle management processes.
+            </p>
+            <p>
+              
+            </p>
+          </div>
+        </div>
+        
+
+      </div>
+    </section><!-- End Features Section -->
+
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        
+
+        <div class="row gy-4 mt-4">
+
+          <div class="col-lg-4">
+
+            <div class="info-item d-flex">
+              <i class="bi bi-geo-alt flex-shrink-0"></i>
+              <div>
+                <h4>Location:</h4>
+                <p>Check post, Sukkaliyur karur-639003</p>
+              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex">
+              <i class="bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h4>Email:</h4>
+                <p>waytotrack2023@gmail.com</p>
+              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex">
+              <i class="bi bi-phone flex-shrink-0"></i>
+              <div>
+                <h4>Call:</h4>
+                <p>+91 7200401448</p>
+              </div>
+            </div><!-- End Info Item -->
+
+          </div>
+
+          <div class="col-lg-8">
+            <form id="whatsappForm" class="whatsapp-form">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        <input type="text" class="form-control" name="email" id="email" placeholder="Mobile Number" required>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Product Name" required>
+                </div>
+                <div class="form-group mt-3">
+                    <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message" required></textarea>
+                </div>
+                <div class="my-3">
+                    <div class="error-message"></div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary px-5" type="button" onclick="sendWhatsAppMessage()">Send Message</button>
+                </div>
+            </form>
+        </div><!-- End Contact Form -->
+          
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>Way to track</span>
+          </a>
+          <p>Celebrating every journey with precision and reliability – Way to Track, your GPS solution.</p>
+          <div class="social-links d-flex mt-4">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#product">Products</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <p>
+            Check post, <br>
+            Sukkaliyur, <br>
+            karur-63900 <br><br>
+            <strong>Phone:</strong> +91 7200401448<br>
+            <strong>Email:</strong> waytotrack2023@gmail.com<br>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Lapworkz</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+       
+        Developed by <a href="https://lapworkz.web.app">Lapworkz</a>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  
+  
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    function sendWhatsAppMessage() {
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+
+        // Construct WhatsApp message
+        const whatsappMessage = `Hi, my name is ${name}. My Mobile Number is ${email}. I want to discuss ${subject}. Message: ${message}`;
+
+        // Encode message for URL
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+
+        // Open WhatsApp with pre-filled message
+        const defaultNumber = '0000000000'; // Change this to your default number
+  const whatsappURL = `https://api.whatsapp.com/send?phone=${defaultNumber}&text=${encodedMessage}`;
+  window.open(whatsappURL);
+    }
+
+    
+</script>
+
+</body>
+
+</html>

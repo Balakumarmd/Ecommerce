@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>Available Products</title>
+    
+    <style>
+        body {
+            background-color: #fff;
+            /* Set your desired background color */
+        }
+
+        .container-fluid {
+            padding: 20px;
+            background-color: #f0f0f0;
+            /* Set your desired background color */
+        }
+
+        .section-title {
+            text-align: center;
+        }
+
+        .product {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Additional CSS for product images */
+        .product img {
+            max-width: 100%; /* Make sure the image doesn't exceed its container */
+            max-height: 100%; /* Make sure the image doesn't exceed its container */
+            display: block; /* Remove extra space below the image */
+            margin: 0 auto; /* Center the image horizontally */
+        }
+
+        .product h4 {
+            font-size: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .product span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .product button {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <div class="container-fluid products big-padding px-3 bg-gray">
+        <div class="container-xl">
+            <div class="col-12">
+                <!-- Back button to go to the previous page -->
+                <button class="btn btn-secondary mt-3" onclick="goBack()">Back</button>
+            </div>
+            <div class="section-title row">
+                <h2 class="fs-1 fw-bold">Available Products</h2>
+            </div>
+            <div class="row" id="productDetailsContainer">
+                <!-- Product details will be dynamically added here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Add your form elements for editing (input fields for name, price, description, image) -->
+                    <label for="editProductName">Product Name:</label>
+                    <input type="text" id="editProductName" class="form-control" required>
+    
+                    <label for="editProductPrice">Price:</label>
+                    <input type="number" id="editProductPrice" class="form-control" required>
+    
+                    <label for="editProductDescription">Description:</label>
+                    <textarea id="editProductDescription" class="form-control" required></textarea>
+    
+                    <!-- Input for image upload -->
+                    <label for="editProductImage">Change Image:</label>
+                    <input type="file" id="editProductImage" class="form-control" accept="image/*">
+    
+                    <!-- Display the current image -->
+                    <img id="currentProductImage" class="mt-2" style="max-width: 100%;" alt="Current Image">
+    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveProductChanges()">Save Changes</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteProduct()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <footer>
+        <!-- Include your footer content here (if needed) -->
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const firebaseConfig = {
+  apiKey: "################",
+  authDomain: "#################",
+  projectId: "##############",
+  storageBucket: "############",
+  messagingSenderId: "############",
+  appId: "#############",
+  measurementId: "##########"
+};
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Declare a global variable to store the product ID being edited
+        let editProductId;
+
+        async function displayProducts() {
+            const productListContainer = document.getElementById('productDetailsContainer');
+
+            // Clear existing content
+            productListContainer.innerHTML = '';
+
+            try {
+                const querySnapshot = await db.collection('product').get();
+
+                querySnapshot.forEach((doc) => {
+                    const productData = doc.data();
+
+                    const productContainer = document.createElement('div');
+                    productContainer.className = 'col-lg-3 col-md-4 mb-4';
+                    productContainer.innerHTML = `
+                        <div class="product bg-white p-4 text-center shadow-md">
+                            <img class="mah-150" src="${productData.imageUrl}" alt="${productData.name}" width="200" height="250"><br>
+                            <div class="d-inline-block">
+                                <h4 class="fw-bolder fs-5 mt-4">${productData.name}</h4>
+                                <span class="fw-bolder fs-4">₹${productData.price}</span>
+                                <!--<p class="fw-bolder fs-5 mt-4">Description: ${productData.des}</p>--> 
+                            </div><br>
+                            <button class="btn btn-primary px-5" onclick="editProduct('${doc.id}')">Edit</button>
+                            <button class="btn btn-danger px-5" onclick="deleteProduct('${doc.id}')">Delete</button>
+                        </div>
+                    `;
+
+                    productListContainer.appendChild(productContainer);
+
+                });
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        }
+        function editProduct(productId) {
+    // Store the product ID in the global variable
+    editProductId = productId;
+
+    // Fetch the existing product data from Firestore
+    db.collection('product').doc(productId).get()
+        .then((doc) => {
+            if (doc.exists) {
+                const productData = doc.data();
+                console.log("Product Data:", productData); // Log productData to check if description is fetched
+
+                // Update the modal input fields with existing data
+                const editProductNameInput = document.getElementById('editProductName');
+                const editProductPriceInput = document.getElementById('editProductPrice');
+                const editProductDescriptionInput = document.getElementById('editProductDescription');
+                const editProductImageInput = document.getElementById('editProductImage');
+                const currentProductImage = document.getElementById('currentProductImage');
+
+                if (editProductNameInput && editProductPriceInput && editProductDescriptionInput && editProductImageInput && currentProductImage) {
+                    editProductNameInput.value = productData.name;
+                    editProductPriceInput.value = productData.price;
+                    editProductDescriptionInput.value = productData.des; // Update to productData.des
+                    currentProductImage.src = productData.imageUrl;
+
+                    // Show the modal
+                    $('#editProductModal').modal('show');
+
+                    // Add an event listener to the file input for the change event
+                    editProductImageInput.addEventListener('change', () => {
+                        // Update the image preview when a new image is selected
+                        const newImageFile = editProductImageInput.files[0];
+                        if (newImageFile) {
+                            const newImageURL = URL.createObjectURL(newImageFile);
+                            currentProductImage.src = newImageURL;
+                        }
+                    });
+                } else {
+                    console.error('One or more input elements not found.');
+                }
+            } else {
+                // Doc doesn't exist
+                console.error('No such document!');
+            }
+        })
+        .catch((error) => {
+            console.error('Error getting product details: ', error);
+        });
+}
+
+function saveProductChanges() {
+    // Retrieve the edited product details from the input fields
+    const editedProductName = document.getElementById('editProductName').value;
+    const editedProductPrice = document.getElementById('editProductPrice').value;
+    const editedProductDescription = document.getElementById('editProductDescription').value;
+    const editedProductImageInput = document.getElementById('editProductImage');
+    const currentProductImage = document.getElementById('currentProductImage');
+
+    // Get the selected file from the input
+    const newImageFile = editedProductImageInput.files[0];
+
+    console.log("Edited Description:", editedProductDescription); // Log edited description to check if it's correctly retrieved
+
+    // Use the stored editProductId to update the specific product document in Firestore
+    if (editProductId) {
+        if (newImageFile) {
+            // Get reference to the existing image in Firebase Storage
+            const storageRef = firebase.storage().ref(`images/${editProductId}`);
+
+            // Delete the existing image
+            storageRef.delete()
+                .then(() => {
+                    // Upload the new image
+                    const imageUploadTask = storageRef.put(newImageFile);
+
+                    imageUploadTask.on('state_changed',
+                        (snapshot) => {
+                            // Track the upload progress if needed
+                        },
+                        (error) => {
+                            console.error('Error uploading image:', error);
+                        },
+                        () => {
+                            // On successful upload, get the download URL and update the Firestore document
+                            imageUploadTask.snapshot.ref.getDownloadURL()
+                                .then((downloadURL) => {
+                                    // Update the corresponding fields in Firestore
+                                    db.collection('product').doc(editProductId).update({
+                                            name: editedProductName,
+                                            price: editedProductPrice,
+                                            des: editedProductDescription, // Update to des
+                                            imageUrl: downloadURL
+                                        })
+                                        .then(() => {
+                                            console.log('Product details updated successfully.');
+                                            // Close the modal after updating
+                                            $('#editProductModal').modal('hide');
+                                            // Refresh the product details on the page if needed
+                                            displayProducts();
+                                        })
+                                        .catch((updateError) => {
+                                            console.error('Error updating product details: ', updateError);
+                                        });
+                                })
+                                .catch((urlError) => {
+                                    console.error('Error getting download URL:', urlError);
+                                });
+                        }
+                    );
+                })
+                .catch((error) => {
+                    console.error('Error deleting existing image:', error);
+                });
+        } else {
+            // If no new image is selected, update other fields in Firestore without changing the image
+            db.collection('product').doc(editProductId).update({
+                    name: editedProductName,
+                    price: editedProductPrice,
+                    des: editedProductDescription, // Update to des
+                })
+                .then(() => {
+                    console.log('Product details updated successfully.');
+                    // Close the modal after updating
+                    $('#editProductModal').modal('hide');
+                    // Refresh the product details on the page if needed
+                    displayProducts();
+                })
+                .catch((error) => {
+                    console.error('Error updating product details: ', error);
+                });
+        }
+    } else {
+        console.error('No product ID available for editing.');
+    }
+}
+
+
+function deleteProduct(productId) {
+    if (confirm("Are you sure you want to delete this product?")) {
+        db.collection('product').doc(productId).delete()
+            .then(() => {
+                console.log('Product deleted successfully.');
+                // Refresh the product details on the page after deletion
+                displayProducts();
+            })
+            .catch((error) => {
+                console.error('Error deleting product: ', error);
+            });
+    }
+}
+
+function goBack() {
+    window.history.back();
+}
+
+        // Initial call to fetch and display products
+        displayProducts();
+    </script>
+</body>
+
+</html>
